@@ -1,15 +1,21 @@
 package routes
 
 import (
+	"ToDoApp/internal/controllers"
 	"ToDoApp/internal/handler/hello"
 
 	"github.com/labstack/echo/v4"
 )
 
 func GenerateRoutes(echo *echo.Echo) {
-	generateGetRoutes(echo)
+	generateHelloRoutes(echo)
+	generateToDoRoutes(echo)
 }
 
-func generateGetRoutes(echo *echo.Echo) {
+func generateHelloRoutes(echo *echo.Echo) {
 	echo.GET("/hello", hello.GetHello)
+}
+
+func generateToDoRoutes(echo *echo.Echo) {
+	echo.POST("/todo", controllers.CreateToDo)
 }
