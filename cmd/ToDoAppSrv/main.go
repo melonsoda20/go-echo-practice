@@ -1,13 +1,13 @@
 package main
 
 import (
-	"ToDoApp/internal/handler/hello"
+	"ToDoApp/internal/routes"
 
 	"github.com/labstack/echo/v4"
 )
 
 func main() {
 	e := echo.New()
-	e.GET("/", hello.GetHello)
+	routes.GenerateRoutes(e)
 	e.Logger.Fatal(e.Start(":1323"))
 }
