@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"ToDoApp/internal/models/filters"
 	"ToDoApp/internal/models/requests"
 	"ToDoApp/internal/services/errors"
 	"net/http"
@@ -9,7 +10,7 @@ import (
 )
 
 func CreateToDo(c echo.Context) (err error) {
-	r := new(*requests.CreateToDo)
+	r := new(requests.CreateToDo)
 	if err = c.Bind(r); err != nil {
 		return c.JSON(http.StatusBadRequest, errors.NewValidatorError(err))
 	}
@@ -18,5 +19,7 @@ func CreateToDo(c echo.Context) (err error) {
 		return c.JSON(http.StatusBadRequest, errors.NewValidatorError(err))
 	}
 
-	return c.JSON(http.StatusOK, r)
+	createToDoFilterDTO := filters.GenerateCreateToDoDTO(r.Name, r.Age, r.Created_by)
+
+	return c.JSON(http.StatusOK, createToDoFilterDTO)
 }
